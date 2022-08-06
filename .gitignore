@@ -41,3 +41,4 @@ Java/*/.settings/org.eclipse.jdt.core.prefs
 Java/*/.settings/org.eclipse.buildship.core.prefs
 Java/MoppyControlGUI/**/*.form
 **/.vscode
+Microcontroller/Moppy2-Arduino/Moppy2.code-workspace

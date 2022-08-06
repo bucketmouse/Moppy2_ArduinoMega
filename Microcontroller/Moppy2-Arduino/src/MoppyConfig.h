@@ -31,6 +31,9 @@
 // is working
 #define PLAY_STARTUP_SOUND true
 
+// Enable support for up to 16 devices on boards with enough pins (eg. the Arduino Mega)
+#define USE_EXTENDED_PINS true
+
 // Device address for this microcontroller (only messages sent to this address
 // will be processed.
 #define DEVICE_ADDRESS 0x01

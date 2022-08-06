@@ -40,8 +40,12 @@ namespace instruments {
     // First drive being used for floppies, and the last drive.  Used for calculating
     // step and direction pins.
     static const byte FIRST_DRIVE = 1;
-    static const byte LAST_DRIVE = 8; // This sketch can handle only up to 9 drives (the max for Arduino Uno)
-
+    #if (!USE_EXTENDED_PINS)
+        static const byte LAST_DRIVE = 9; // This sketch can handle only up to 9 drives (the max for Arduino Uno)
+    #else
+        static const byte LAST_DRIVE = 16; // Handle up to 16 drives (all midi channels!) if we have enough pins
+    #endif
+    
     // Maximum note number to attempt to play on floppy drives.  It's possible higher notes may work,
     // but they may also cause instability.
     static const byte MAX_FLOPPY_NOTE = 71;

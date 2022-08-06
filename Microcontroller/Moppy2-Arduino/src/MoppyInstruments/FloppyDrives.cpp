@@ -20,50 +20,51 @@ namespace instruments {
  NOTE: Index zero of this array controls the "resetAll" function, and should be the
  same as the largest value in this array
  */
-unsigned int FloppyDrives::MIN_POSITION[] = {0,0,0,0,0,0,0,0,0,0};
-unsigned int FloppyDrives::MAX_POSITION[] = {158,158,158,158,158,158,158,158,158,158};
 
-//Array to track the current position of each floppy head.
-unsigned int FloppyDrives::currentPosition[] = {0,0,0,0,0,0,0,0,0,0};
+#if (!USE_EXTENDED_PINS)
+  unsigned int FloppyDrives::MIN_POSITION[] = {0,0,0,0,0,0,0,0,0,0};
+  unsigned int FloppyDrives::MAX_POSITION[] = {158,158,158,158,158,158,158,158,158,158};
 
-/*Array to keep track of state of each pin.  Even indexes track the control-pins for toggle purposes.  Odd indexes
- track direction-pins.  LOW = forward, HIGH=reverse
- */
-int FloppyDrives::currentState[] = {0,0,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW};
+  //Array to track the current position of each floppy head.
+  unsigned int FloppyDrives::currentPosition[] = {0,0,0,0,0,0,0,0,0,0};
 
-// Current period assigned to each drive.  0 = off.  Each period is two-ticks (as defined by
-// TIMER_RESOLUTION in MoppyInstrument.h) long.
-unsigned int FloppyDrives::currentPeriod[] = {0,0,0,0,0,0,0,0,0,0};
+  /*Array to keep track of state of each pin.  Even indexes track the control-pins for toggle purposes.  Odd indexes
+  track direction-pins.  LOW = forward, HIGH=reverse
+  */
+  int FloppyDrives::currentState[] = {0,0,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW};
 
-// Tracks the current tick-count for each drive (see FloppyDrives::tick() below)
-unsigned int FloppyDrives::currentTick[] = {0,0,0,0,0,0,0,0,0,0};
+  // Current period assigned to each drive.  0 = off.  Each period is two-ticks (as defined by
+  // TIMER_RESOLUTION in MoppyInstrument.h) long.
+  unsigned int FloppyDrives::currentPeriod[] = {0,0,0,0,0,0,0,0,0,0};
 
-// The period originally set by incoming messages (prior to any modifications from pitch-bending)
-unsigned int FloppyDrives::originalPeriod[] = {0,0,0,0,0,0,0,0,0,0};
+  // Tracks the current tick-count for each drive (see FloppyDrives::tick() below)
+  unsigned int FloppyDrives::currentTick[] = {0,0,0,0,0,0,0,0,0,0};
+
+  // The period originally set by incoming messages (prior to any modifications from pitch-bending)
+  unsigned int FloppyDrives::originalPeriod[] = {0,0,0,0,0,0,0,0,0,0};
+#else 
+  unsigned int FloppyDrives::MIN_POSITION[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  unsigned int FloppyDrives::MAX_POSITION[] = {158,158,158,158,158,158,158,158,158,158,158,158,158,158,158,158,158,158,158}; 
+  unsigned int FloppyDrives::currentPosition[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; 
+  int FloppyDrives::currentState[] = {0,0,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW}; 
+  unsigned int FloppyDrives::currentPeriod[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; 
+  unsigned int FloppyDrives::currentTick[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; 
+  unsigned int FloppyDrives::originalPeriod[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+#endif
+
 
 void FloppyDrives::setup() {
 
   // Prepare pins (0 and 1 are reserved for Serial communications)
-  pinMode(2, OUTPUT); // Step control 1
-  pinMode(3, OUTPUT); // Direction 1
-  pinMode(4, OUTPUT); // Step control 2
-  pinMode(5, OUTPUT); // Direction 2
-  pinMode(6, OUTPUT); // Step control 3
-  pinMode(7, OUTPUT); // Direction 3
-  pinMode(8, OUTPUT); // Step control 4
-  pinMode(9, OUTPUT); // Direction 4
-  pinMode(10, OUTPUT); // Step control 5
-  pinMode(11, OUTPUT); // Direction 5
-  pinMode(12, OUTPUT); // Step control 6
-  pinMode(13, OUTPUT); // Direction 6
-  pinMode(14, OUTPUT); // Step control 7
-  pinMode(15, OUTPUT); // Direction 7
-  pinMode(16, OUTPUT); // Step control 8
-  pinMode(17, OUTPUT); // Direction 8
-  pinMode(18, OUTPUT); // Step control 9
-  pinMode(19, OUTPUT); // Direction 9
-
-
+ 
+  byte i = 0;
+  while(i < LAST_DRIVE)
+  {
+    pinMode(2+i*2, OUTPUT); // Step control
+    pinMode(3+i*2, OUTPUT); // Direction 
+    i++;
+  }
+  
   // With all pins setup, let's do a first run reset
   resetAll();
   delay(500); // Wait a half second for safety
