@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Moppy.Control.Views.NetworkPanel">
+  <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*,6,1.4*" Margin="10,8,10,10">
+    <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="8" Margin="0,0,0,6">
+      <TextBlock Text="Network Bridges" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" />
+      <Button x:Name="RefreshButton" Padding="5" ToolTip.Tip="Rescan serial ports">
+        <PathIcon Data="{StaticResource RefreshIcon}" />
+      </Button>
+    </StackPanel>
+    <TextBlock Grid.Row="1" Grid.ColumnSpan="3" x:Name="ErrorText" Foreground="#D13438" TextWrapping="Wrap"
+               IsVisible="False" Margin="0,0,0,6" />
+    <Border Grid.Row="2" Grid.Column="0" Classes="panel">
+      <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
+        <StackPanel x:Name="BridgesPanel" Margin="4" Spacing="2" />
+      </ScrollViewer>
+    </Border>
+    <Border Grid.Row="2" Grid.Column="2" Classes="panel">
+      <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
+        <StackPanel x:Name="DevicesPanel" Margin="4" Spacing="4" />
+      </ScrollViewer>
+    </Border>
+  </Grid>
+</UserControl>

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Moppy.Control.Tests/Moppy.Control.Tests.csproj" />
+  <Project Path="Moppy.Control/Moppy.Control.csproj" />
+  <Project Path="Moppy.Core.Tests/Moppy.Core.Tests.csproj" />
+  <Project Path="Moppy.Core/Moppy.Core.csproj" />
+</Solution>

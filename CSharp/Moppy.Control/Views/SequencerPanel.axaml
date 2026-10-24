@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Moppy.Control.Views.SequencerPanel"
+             MinWidth="400" MinHeight="200">
+  <Grid RowDefinitions="*,Auto,Auto,Auto,Auto,Auto,Auto" Margin="10,8,10,6">
+    <ListBox Grid.Row="0" x:Name="PlaylistList" Classes="playlist" SelectionMode="Multiple" MinHeight="40"
+             BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+             ToolTip.Tip="Add files to the playlist... (double-click a file to play it)" />
+
+    <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto,*,Auto,Auto" Margin="0,6,0,0">
+      <CheckBox Grid.Column="0" x:Name="AutoResetCheckBox" Content="Auto Reset" Margin="0,0,12,0"
+                ToolTip.Tip="Resets the instruments when a sequence ends (when unchecked, use the Stop button to reset)" />
+      <CheckBox Grid.Column="1" x:Name="RepeatCheckBox" Content="Repeat"
+                ToolTip.Tip="Repeats playlist after the last (or only) song has finished." />
+      <Button Grid.Column="3" x:Name="RemoveFileButton" Content="Remove File" IsEnabled="False" Margin="0,0,6,0" />
+      <Button Grid.Column="4" x:Name="AddFileButton" Content="Add File" />
+    </Grid>
+
+    <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto" Margin="0,4,0,0">
+      <TextBlock Grid.Column="0" x:Name="CurrentTimeLabel" Text="00:00" VerticalAlignment="Center" Width="44" />
+      <Slider Grid.Column="1" x:Name="SequenceSlider" Minimum="0" Maximum="120" TickFrequency="15"
+              TickPlacement="BottomRight" Margin="6,0" />
+      <TextBlock Grid.Column="2" x:Name="TotalTimeLabel" Text="00:00" VerticalAlignment="Center" Width="44" TextAlignment="Right" />
+    </Grid>
+
+    <Grid Grid.Row="3" ColumnDefinitions="Auto,Auto,*,Auto,Auto">
+      <Button Grid.Column="0" x:Name="StopButton" Width="49" Height="28" HorizontalContentAlignment="Center"
+              ToolTip.Tip="Stop / Reset instruments">
+        <PathIcon Data="{StaticResource StopIcon}" Width="10" Height="10" />
+      </Button>
+      <Button Grid.Column="1" x:Name="PlayButton" Width="49" Height="28" Margin="6,0,0,0" HorizontalContentAlignment="Center"
+              ToolTip.Tip="Play / Pause sequence playback">
+        <PathIcon x:Name="PlayIcon" Data="{StaticResource PlayIcon}" />
+      </Button>
+      <TextBlock Grid.Column="3" x:Name="VolumeLabel" Text="100% Volume" VerticalAlignment="Center" Margin="0,0,6,0" />
+      <Slider Grid.Column="4" x:Name="VolumeSlider" Minimum="0" Maximum="100" Value="100" Width="110" />
+    </Grid>
+
+    <CheckBox Grid.Row="4" x:Name="VolumeOverrideCheckBox" Content="Override MIDI Volume" HorizontalAlignment="Right"
+              ToolTip.Tip="Play every note at the volume above, instead of scaling each note's own velocity" />
+
+    <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="6" Margin="0,2">
+      <NumericUpDown x:Name="TempoSpinner" Minimum="1" Maximum="990" Increment="1" Value="120" FormatString="0.##"
+                     Width="110" ToolTip.Tip="Use scrollwheel to manually adjust tempo" />
+      <TextBlock Text="BPM" VerticalAlignment="Center" />
+    </StackPanel>
+
+    <Grid Grid.Row="6" ColumnDefinitions="Auto,Auto,*" RowDefinitions="Auto,Auto" Margin="0,4,0,0">
+      <TextBlock Grid.Row="0" Text="MIDI In:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,6,0"
+                 ToolTip.Tip="MIDI device to receive events from" />
+      <ComboBox Grid.Row="0" Grid.Column="1" x:Name="MidiInComboBox" Width="220" />
+      <TextBlock Grid.Row="1" Text="MIDI Out:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,6,0"
+                 ToolTip.Tip="MIDI device to send all raw MIDI events to." />
+      <ComboBox Grid.Row="1" Grid.Column="1" x:Name="MidiOutComboBox" Width="220" Margin="0,4,0,0" />
+    </Grid>
+  </Grid>
+</UserControl>

@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="using:Moppy.Control.Views"
+        x:Class="Moppy.Control.MainWindow"
+        Title="Moppy Control"
+        MinWidth="1024" MinHeight="600"
+        Width="1024" Height="600">
+  <Grid x:Name="SplitGrid" RowDefinitions="300,5,*">
+    <Grid Grid.Row="0" ColumnDefinitions="*,*">
+      <Border Grid.Column="0" Classes="panel" Margin="2,2,1,0">
+        <views:SequencerPanel x:Name="SequencerPanel" />
+      </Border>
+      <Border Grid.Column="1" Classes="panel" Margin="1,2,2,0">
+        <views:NetworkPanel x:Name="NetworkPanel" />
+      </Border>
+    </Grid>
+    <GridSplitter Grid.Row="1" ResizeDirection="Rows" />
+    <Border Grid.Row="2" Classes="panel" Margin="2,0,2,2" MinHeight="180">
+      <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
+        <views:MapperCollectionPanel x:Name="MapperCollectionPanel" />
+      </ScrollViewer>
+    </Border>
+  </Grid>
+</Window>

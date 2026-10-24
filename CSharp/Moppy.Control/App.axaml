@@ -1,0 +1,36 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Moppy.Control.App"
+             RequestedThemeVariant="Default">
+  <Application.Styles>
+    <FluentTheme DensityStyle="Compact" />
+    <Style Selector="Border.panel">
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseLowBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="TextBox.script">
+      <Setter Property="FontFamily" Value="Cascadia Mono, Consolas, Menlo, DejaVu Sans Mono, monospace" />
+      <Setter Property="AcceptsReturn" Value="True" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="VerticalContentAlignment" Value="Top" />
+    </Style>
+    <Style Selector="TextBox.script.invalid">
+      <Setter Property="Foreground" Value="#D13438" />
+    </Style>
+    <Style Selector="ListBox.playlist ListBoxItem">
+      <Setter Property="Padding" Value="6,1" />
+      <Setter Property="MinHeight" Value="0" />
+    </Style>
+    <Style Selector="PathIcon">
+      <Setter Property="Width" Value="12" />
+      <Setter Property="Height" Value="12" />
+    </Style>
+  </Application.Styles>
+  <Application.Resources>
+    <StreamGeometry x:Key="PlayIcon">M 0,0 L 10,6 L 0,12 Z</StreamGeometry>
+    <StreamGeometry x:Key="PauseIcon">M 0,0 H 3.5 V 12 H 0 Z M 6.5,0 H 10 V 12 H 6.5 Z</StreamGeometry>
+    <StreamGeometry x:Key="StopIcon">M 0,0 H 10 V 10 H 0 Z</StreamGeometry>
+    <StreamGeometry x:Key="RefreshIcon">M 12,4 A 6,6 0 1 0 13.5,9 H 11.4 A 4,4 0 1 1 10.6,5.4 L 8.5,7.5 H 14 V 2 Z</StreamGeometry>
+    <StreamGeometry x:Key="DeleteIcon">M 3,1 H 9 V 2 H 12 V 3.5 H 0 V 2 H 3 Z M 1,4.5 H 11 L 10,14 H 2 Z</StreamGeometry>
+  </Application.Resources>
+</Application>

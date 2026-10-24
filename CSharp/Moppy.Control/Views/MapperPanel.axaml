@@ -1,0 +1,13 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Moppy.Control.Views.MapperPanel">
+  <Border BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}" BorderThickness="0,0,0,1" Padding="10,4,10,10">
+    <Grid RowDefinitions="Auto,Auto,90" ColumnDefinitions="*,14,*,14,*,14,*">
+      <Button Grid.Row="0" Grid.Column="6" x:Name="DeleteMapperButton" HorizontalAlignment="Right" Padding="8,5"
+              ToolTip.Tip="Remove this mapper">
+        <PathIcon Data="{StaticResource DeleteIcon}" Width="12" Height="14" />
+      </Button>
+      <!-- Script fields are added in code: label + choice in row 1, script in row 2 -->
+    </Grid>
+  </Border>
+</UserControl>
